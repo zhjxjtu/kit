@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-  attr_accessible :email, :password_digest, :remember_token, :account_token, :name, :phone, :description
+  attr_accessible :email, :password, :password_confirmation, 
+                  :remember_token, :account_token, :name, :phone, :description
   has_secure_password
 
   before_save { |user| user.email = email.downcase }
@@ -17,5 +18,4 @@ class User < ActiveRecord::Base
       self.account_token = SecureRandom.urlsafe_base64
     end
 
-end
 end
