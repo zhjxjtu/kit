@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   def create
   	@user = User.new(params[:user])
   	if @user.save
-      #sign_in(@user, params[:helper][:remember_me])
+      #sign_in(@user, params[:remember_me])
       #flash[:success] = "Welcome to the Focus App!"
       redirect_to root_path
   	else

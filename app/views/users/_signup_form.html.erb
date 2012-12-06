@@ -4,7 +4,7 @@
   <%= f.text_field :email, placeholder: "Email" %>
   <%= f.password_field :password, placeholder: "Password" %>
   <%= f.password_field :password_confirmation, placeholder: "Re-type password" %>
-  <label class="checkbox"><%= check_box("helper", "remember_me", { checked: true }, "yes", "no") %> Remember me</label>
+  <label class="checkbox"><%= f.check_box :remember_me, { checked: true }, "yes", "no" %> Remember me</label>
   <%= f.submit "Create my account", class: "btn btn-warning signup-btn" %>
   <br>
 <% end %>
