@@ -16,4 +16,20 @@ class UsersController < ApplicationController
   	end
   end
 
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(params[:user])
+      flash[:success] = "Profile updated"
+      sign_in(@user,"yes")
+      redirect_to root_path
+    else
+      redirect_to edit_user_path
+      flash[:error] = @user.errors.full_messages[0]
+    end
+  end
+
 end
