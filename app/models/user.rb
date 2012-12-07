@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
                   :remember_token, :account_token, :name, :phone, :description
   has_secure_password
 
+  has_many :invitations, dependent: :destroy
+
   before_save { |user| user.email = email.downcase }
   before_save :create_tokens
 
