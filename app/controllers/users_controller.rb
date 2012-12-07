@@ -7,12 +7,12 @@ class UsersController < ApplicationController
   def create
   	@user = User.new(params[:user])
   	if @user.save
-      #sign_in(@user, params[:remember_me])
-      #flash[:success] = "Welcome to the Focus App!"
+      sign_in(@user, params[:page][:remember_me])
+      flash[:success] = "Welcome to the Focus App!"
       redirect_to root_path
   	else
-  	  #flash[:error] = @user.errors.full_messages[0]
-      redirect_to signup_path
+  	  flash.now[:error] = @user.errors.full_messages[0]
+      render 'new'
   	end
   end
 
@@ -22,13 +22,13 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update_attributes(params[:user])
-      flash[:success] = "Profile updated"
+    if update_without_password(@user, params[:user])
+      flash.now[:success] = "Profile updated"
       sign_in(@user,"yes")
       redirect_to root_path
     else
-      redirect_to edit_user_path
-      flash[:error] = @user.errors.full_messages[0]
+      flash.now[:error] = @user.errors.full_messages[0]
+      render 'edit'
     end
   end
 
