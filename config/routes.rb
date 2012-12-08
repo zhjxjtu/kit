@@ -2,7 +2,7 @@ Kit::Application.routes.draw do
 
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
-  #resources :invitations, only: [:show, :create]
+  resources :invitations, only: [:show, :create]
   #resources :accept_invitations, only: [:new, :create]
   #resources :contacts, only: [:show]
 
@@ -10,6 +10,8 @@ Kit::Application.routes.draw do
   match '/signup',  to: 'users#new'
   match '/signin',  to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
+  match '/invitations_new_signup', to: 'invitations#new_signup'
+  match '/invitations_accept_signup', to: 'invitations#accept_signup', via: :post
 
 
   # The priority is based upon order of creation:

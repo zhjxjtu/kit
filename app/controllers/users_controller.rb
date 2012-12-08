@@ -23,7 +23,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if update_without_password(@user, params[:user])
-      flash.now[:success] = "Profile updated"
+      flash[:success] = "Profile updated"
       sign_in(@user,"yes")
       redirect_to root_path
     else
