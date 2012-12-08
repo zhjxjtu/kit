@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121207180112) do
+ActiveRecord::Schema.define(:version => 20121208151956) do
 
   create_table "invitations", :force => true do |t|
     t.integer  "user_id"
@@ -24,6 +24,17 @@ ActiveRecord::Schema.define(:version => 20121207180112) do
 
   add_index "invitations", ["token"], :name => "index_invitations_on_token"
   add_index "invitations", ["user_id", "email"], :name => "index_invitations_on_user_id_and_email", :unique => true
+
+  create_table "relationships", :force => true do |t|
+    t.integer  "inviter_id"
+    t.integer  "invitee_id"
+    t.integer  "invitation_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "relationships", ["invitation_id"], :name => "index_relationships_on_invitation_id", :unique => true
+  add_index "relationships", ["inviter_id", "invitee_id"], :name => "index_relationships_on_inviter_id_and_invitee_id", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email"

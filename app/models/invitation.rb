@@ -1,6 +1,7 @@
 class Invitation < ActiveRecord::Base
   attr_accessible :email, :status, :token, :user_id
   belongs_to :user
+  has_one :relationship
 
   before_save :create_token
 

@@ -4,6 +4,10 @@ class User < ActiveRecord::Base
   has_secure_password
 
   has_many :invitations, dependent: :destroy
+  has_many :relationships, foreign_key: "inviter_id", dependent: :destroy
+  has_many :invitees, through: :relationships, source: :invitee
+  has_many :reverse_relationships, foreign_key: "invitee_id", class_name: "Relationship", dependent: :destroy
+  has_many :inviters, through: :reverse_relationships, source: :inviter
 
   before_save { |user| user.email = email.downcase }
   before_save :create_tokens

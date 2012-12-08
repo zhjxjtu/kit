@@ -12,6 +12,7 @@ class InvitationsController < ApplicationController
     @user = User.new(params[:user])
     @invitation = Invitation.find_by_token(params[:page][:token])
     if @user.save
+      create_relationship(@invitation, @user)
       @invitation.update_attribute(:status, "connected")
       sign_in(@user, params[:page][:remember_me])
       flash[:success] = "Welcome to the Focus App!"
