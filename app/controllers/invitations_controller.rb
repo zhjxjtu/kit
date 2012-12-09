@@ -24,6 +24,7 @@ class InvitationsController < ApplicationController
 
   def show
   	@invitation = Invitation.new
+    @invitations = current_user.invitations.where("status = ?", "new")
   end
 
   def create

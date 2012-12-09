@@ -1,0 +1,27 @@
+<table class="table table-bordered">
+  <tr>
+  	<td><strong>Name</strong></td>
+  	<td><strong>Email</strong></td>
+  	<td><strong>Phone Number</strong></td>
+  	<td><strong>Description</strong></td>
+  </tr>
+  <% @invitees.each do |contact| %>
+    <% @contact = User.find_by_id(contact.invitee) %>
+    <tr>
+      <td><%= @contact.name %></td>
+      <td><%= @contact.email %></td>
+      <td><%= @contact.phone %></td>
+      <td><%= @contact.description %></td>
+    </tr>
+  <% end %>
+  
+  <% @inviters.each do |contact| %>
+    <% @contact = User.find_by_id(contact.inviter) %>
+    <tr>
+      <td><%= @contact.name %></td>
+      <td><%= @contact.email %></td>
+      <td><%= @contact.phone %></td>
+      <td><%= @contact.description %></td>
+    </tr>
+  <% end %>
+</table>

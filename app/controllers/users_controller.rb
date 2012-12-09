@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   	if @user.save
       sign_in(@user, params[:page][:remember_me])
       flash[:success] = "Welcome to the Focus App!"
-      redirect_to root_path
+      redirect_to contact_path(current_user)
   	else
   	  flash.now[:error] = @user.errors.full_messages[0]
       render 'new'

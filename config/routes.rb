@@ -3,8 +3,7 @@ Kit::Application.routes.draw do
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :invitations, only: [:show, :create]
-  #resources :accept_invitations, only: [:new, :create]
-  #resources :contacts, only: [:show]
+  resources :contacts, only: [:show]
 
   root to: 'webpages#landing'
   match '/signup',  to: 'users#new'
