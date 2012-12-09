@@ -13,13 +13,12 @@ class InvitationsController < ApplicationController
     @invitation = Invitation.find_by_token(params[:page][:token])
     if @user.save
       create_relationship(@invitation, @user)
-      @invitation.update_attribute(:status, "connected")
       sign_in(@user, params[:page][:remember_me])
-      flash[:success] = "Welcome to the Focus App!"
+      flash[:success] = "Your infomation has been sent back to #{@invitation.user.name}"
       redirect_to root_path
     else
-      flash.now[:error] = @user.errors.full_messages[0]
-      render 'new'
+      flash[:error] = @user.errors.full_messages[0]
+      redirect_to invitations_new_signup_path + "?token=#{params[:page][:token]}"
     end
   end
 
