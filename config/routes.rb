@@ -11,6 +11,8 @@ Kit::Application.routes.draw do
   match '/signout', to: 'sessions#destroy', via: :delete
   match '/invitations_new_signup', to: 'invitations#new_signup'
   match '/invitations_accept_signup', to: 'invitations#accept_signup', via: :post
+  match '/invitations_new_signin', to: 'invitations#new_signin'
+  match '/invitations_accept_signin', to: 'invitations#accept_signin', via: :post
 
 
   # The priority is based upon order of creation:

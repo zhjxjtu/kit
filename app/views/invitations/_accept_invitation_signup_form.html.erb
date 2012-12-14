@@ -1,5 +1,5 @@
 <%= form_for @user, url: '/invitations_accept_signup' do |f| %>
-  <label><h4>Send your information back<%=  %></h4></label>
+  <label><h4>Send your information back</h4></label>
   <%= hidden_field :page, :token, value: params[:token] %>
   <%= f.text_field :name, placeholder: "Full Name" %>
   <%= f.text_field :email, placeholder: "Email", value: @invitation.email %>
