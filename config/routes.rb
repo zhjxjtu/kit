@@ -4,6 +4,7 @@ Kit::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :invitations, only: [:show, :create]
   resources :contacts, only: [:show]
+  resources :passwords, only: [:edit, :update]
 
   root to: 'webpages#landing'
   match '/signup',  to: 'users#new'
