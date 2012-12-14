@@ -1,6 +1,4 @@
 <% provide(:title, 'Send information') %>
 <div class= "span4 offset4">
-  <%= render 'invitations/accept_invitation_signup_form' %>
-  <br>
-  <p>Alreday have an account?<br><%= link_to "Sign in to send your information back", invitations_new_signin_path + "?token=#{params[:token]}" %></p>
+  <%= render 'invitations/accept_invitation_form' %>
 </div>
