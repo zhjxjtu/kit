@@ -1,0 +1,9 @@
+<%= form_for :session, url: invitations_accept_signin_path do |f| %>
+  <label><h4>Sign in to send your information back</h4></label>
+  <%= hidden_field :page, :token, value: params[:token] %>
+  <%= f.text_field :email, placeholder: "Email" %>
+  <%= f.password_field :password, placeholder: "Password" %>
+  <label class="checkbox"><%= f.check_box :remember_me, { checked: true }, "yes", "no" %> Remember me</label>
+  <%= f.submit "Sign in to connect to #{Invitation.find_by_token(params[:token]).user.name}", class: "btn btn-primary signin-btn" %>
+  <br>
+<% end %>
