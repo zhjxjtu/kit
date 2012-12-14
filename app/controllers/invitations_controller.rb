@@ -22,27 +22,6 @@ class InvitationsController < ApplicationController
     end
   end
 
-  def new_signin
-    unless @invitation = Invitation.find_by_token(params[:token])
-      flash[:error] = "Ooops...The link has expired"
-      redirect_to root_path
-    end
-  end
-
-  def accept_signin
-    user = User.find_by_email(params[:session][:email].downcase)
-    invitation = Invitation.find_by_token(params[:page][:token])
-    if user && user.authenticate(params[:session][:password])
-      create_relationship(invitation, user)
-      sign_in(user, params[:remember_me])
-      flash[:success] = "You are now connected with #{invitation.user.name}"
-      redirect_to contact_path(current_user)
-    else
-      flash[:error] = 'Invalid email or password'
-      redirect_to invitations_new_signin_path + "?token=#{params[:page][:token]}"
-    end
-  end
-
   def show
   	@invitation = Invitation.new
     @invitations = current_user.invitations.where("status = ?", "new")
