@@ -1,20 +1,25 @@
 Kit::Application.routes.draw do
 
-  resources :users
-  resources :sessions, only: [:new, :create, :destroy]
-  resources :invitations, only: [:show, :create]
-  resources :contacts, only: [:show]
-  resources :passwords, only: [:edit, :update]
-
   root to: 'webpages#landing'
+
+  resources :users
   match '/signup',  to: 'users#new'
+
+  resources :sessions, only: [:new, :create, :destroy]
   match '/signin',  to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
+
+  resources :invitations, only: [:show, :create]
   match '/invitations_new_signup', to: 'invitations#new_signup'
   match '/invitations_accept_signup', to: 'invitations#accept_signup', via: :post
   match '/invitations_new_signin', to: 'invitations#new_signin'
   match '/invitations_accept_signin', to: 'invitations#accept_signin', via: :post
 
+  resources :contacts, only: [:show]
+  
+  resources :passwords, only: [:new, :create, :edit, :update]
+  match '/retrieve_password',  to: 'passwords#reset_new'
+  match '/reset_password',  to: 'passwords#reset_update', via: :put
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
