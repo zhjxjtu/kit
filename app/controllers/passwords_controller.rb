@@ -5,13 +5,13 @@ class PasswordsController < ApplicationController
   end
 
   def create
-    @user = User.new
     if User.exists?(email: params[:user][:email])
       @user = User.find_by_email(params[:user][:email])
       flash[:notice] = "An email with the link to reset your password has been sent to #{params[:user][:email]}"
       redirect_to signin_path
       SystemEmails.reset_password(@user).deliver
     else
+      @user = User.new
       flash.now[:error] = "Invalid or wrong email"
       render 'new'
     end
@@ -25,7 +25,14 @@ class PasswordsController < ApplicationController
   end
 
   def reset_update
-    
+    @user = User.find_by_account_token(params[:user][:account_token])
+    if @user.update_attributes(params[:user])
+      flash[:success] = "Please sign in with your new password"
+      redirect_to signin_path
+    else
+      flash[:error] = @user.errors.full_messages[0]
+      redirect_to reset_new_path + "?account_token=#{@user.account_token}"
+    end
   end
 
   def edit

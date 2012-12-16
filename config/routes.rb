@@ -18,8 +18,8 @@ Kit::Application.routes.draw do
   resources :contacts, only: [:show]
   
   resources :passwords, only: [:new, :create, :edit, :update]
-  match '/retrieve_password',  to: 'passwords#reset_new'
-  match '/reset_password',  to: 'passwords#reset_update', via: :put
+  match '/reset_new',  to: 'passwords#reset_new'
+  match '/reset_update',  to: 'passwords#reset_update', via: :put
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
