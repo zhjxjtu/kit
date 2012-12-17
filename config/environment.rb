@@ -20,6 +20,16 @@ Kit::Application.configure do
     enable_starttls_auto: true
   }
 
-  config.action_mailer.default_url_options = { host: 'localhost:3000' }
-
 end
+
+# Mailer configuration for heroku
+
+ActionMailer::Base.smtp_settings = {
+  :address => "smtp.gmail.com",
+  :port => 587,
+  :domain => "gmail.com",
+  :authentication => "plain",
+  :user_name => "focustest.2012@gmail.com",
+  :password => "Fifafifa99@focus",
+  :enable_starttls_auto => true
+}
