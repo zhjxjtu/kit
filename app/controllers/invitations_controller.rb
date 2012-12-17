@@ -1,5 +1,7 @@
 class InvitationsController < ApplicationController
   
+  # Invitations' filter to be set
+
   def new_signup
     @user = User.new
     unless @invitation = Invitation.find_by_token(params[:token])

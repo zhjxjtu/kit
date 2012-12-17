@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
 
+  # filter of show should be contacts user, to be developed
+  before_filter :correct_user, only: [:edit, :update, :show]
+  before_filter :admin_user, only: [:index]
+
   def index
     @users = User.all
   end

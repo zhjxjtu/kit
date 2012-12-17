@@ -1,5 +1,7 @@
 class PasswordsController < ApplicationController
   
+  before_filter :correct_user, only: [:show, :update]
+
   def new
     @user = User.new
   end
