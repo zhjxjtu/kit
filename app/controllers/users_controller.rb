@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
   # filter of show should be contacts user, to be developed
+  before_filter :signed_in_user, only: [:index, :edit, :update, :show]
   before_filter :correct_user, only: [:edit, :update, :show]
   before_filter :admin_user, only: [:index]
 
