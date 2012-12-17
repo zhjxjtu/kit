@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
 
+  def index
+    @users = User.all
+  end
+
   def new
   	@user = User.new
   end
@@ -30,6 +34,10 @@ class UsersController < ApplicationController
       flash.now[:error] = @user.errors.full_messages[0]
       render 'edit'
     end
+  end
+
+  def show
+    @user = User.find(params[:id])
   end
 
 end
