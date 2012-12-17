@@ -17,7 +17,7 @@ class InvitationsController < ApplicationController
       create_relationship(@invitation, @user)
       sign_in(@user, params[:page][:remember_me])
       flash[:success] = "Your infomation has been sent back to #{@invitation.user.name}"
-      redirect_to root_path
+      redirect_to contact_path(current_user)
     else
       flash[:error] = @user.errors.full_messages[0]
       redirect_to invitations_new_signup_path + "?token=#{params[:page][:token]}"

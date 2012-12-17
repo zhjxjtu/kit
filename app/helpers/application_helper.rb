@@ -23,7 +23,7 @@ module ApplicationHelper
 
   def admin_user
   	unless current_user.admin == true
-  	  redirect_to root_path
+  	  redirect_to contact_path(current_user)
   	end
   end 
 

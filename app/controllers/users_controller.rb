@@ -33,7 +33,7 @@ class UsersController < ApplicationController
     if update_without_password(@user, params[:user])
       flash[:success] = "Profile updated"
       sign_in(@user,"yes")
-      redirect_to root_path
+      redirect_to contact_path(current_user)
     else
       flash.now[:error] = @user.errors.full_messages[0]
       render 'edit'
