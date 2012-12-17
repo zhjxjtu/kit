@@ -110,7 +110,7 @@ DEPENDENCIES
   bootstrap-sass (>= 2.0.4)
   coffee-rails (>= 3.2.1)
   jquery-rails
-  pg (>= 0.12.2)
+  pg
   rails (= 3.2.8)
   sass-rails (>= 3.2.3)
   sqlite3
