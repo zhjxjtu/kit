@@ -12,6 +12,7 @@ class PasswordsController < ApplicationController
       @user = User.find_by_email(params[:user][:email])
       flash[:notice] = "An email with the link to reset your password has been sent to #{params[:user][:email]}"
       redirect_to signin_path
+      # Delayed jobs: SystemEmails.delay.reset_password(@user)
       SystemEmails.reset_password(@user).deliver
     else
       @user = User.new

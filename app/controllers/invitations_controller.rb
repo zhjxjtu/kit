@@ -55,6 +55,7 @@ class InvitationsController < ApplicationController
   	if @invitation.save
       flash[:success] = "An invitation sent to #{@invitation.email}"
       redirect_to invitation_path(current_user)
+      # Delayed jobs: SystemEmails.delay.invite(@invitation)
       SystemEmails.invite(@invitation).deliver
   	else
   	  flash.now[:error] = @invitation.errors.full_messages[0]
