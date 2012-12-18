@@ -1,14 +1,10 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.8'
-<<<<<<< HEAD
 gem 'bootstrap-sass', '2.0.4'
 gem 'bcrypt-ruby', '3.0.1'
-=======
-gem 'bootstrap-sass', '>= 2.0.4'
-gem 'bcrypt-ruby', '>= 3.0.1'
+
 gem 'delayed_job_active_record'
->>>>>>> delayed-job
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'
