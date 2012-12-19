@@ -1,12 +1,12 @@
 <table class="table table-bordered">
   <tr>
-  	<td><strong>Email</strong></td>
-  	<td><strong>Time</strong></td>
+  	<th>Email</th>
+  	<th>Time</th>
   </tr>
   <% @invitations.each do |invitation| %>
     <tr>
       <td><%= invitation.email %></td>
-      <td><%= invitation.created_at %></td>
+      <td><%= invitation.created_at.to_formatted_s(:db) %></td>
     </tr>
   <% end %>
 </table>

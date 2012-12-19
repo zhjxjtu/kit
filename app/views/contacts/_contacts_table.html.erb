@@ -1,27 +1,18 @@
+<ul class="nav nav-pills">
+  <li>You have <u><strong><%= @contacts.count %></strong></u> contacts</li>
+</ul>
+
 <table class="table table-bordered">
   <tr>
-  	<td><strong>Name</strong></td>
-  	<td><strong>Email</strong></td>
-  	<td><strong>Phone Number</strong></td>
-  	<td><strong>Description</strong></td>
+  	<th>Name</th>
+    <th>Email</th>
+    <th>Phone Number</th>
   </tr>
-  <% @invitees.each do |contact| %>
-    <% @contact = User.find_by_id(contact.invitee) %>
+  <% @contacts.each do |contact| %>
     <tr>
-      <td><%= @contact.name %></td>
-      <td><%= @contact.email %></td>
-      <td><%= @contact.phone %></td>
-      <td><%= @contact.description %></td>
-    </tr>
-  <% end %>
-  
-  <% @inviters.each do |contact| %>
-    <% @contact = User.find_by_id(contact.inviter) %>
-    <tr>
-      <td><%= @contact.name %></td>
-      <td><%= @contact.email %></td>
-      <td><%= @contact.phone %></td>
-      <td><%= @contact.description %></td>
+      <td><%= contact.name %></td>
+      <td><%= contact.email %></td>
+      <td><%= contact.phone %></td>
     </tr>
   <% end %>
 </table>

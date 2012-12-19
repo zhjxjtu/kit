@@ -1,19 +1,21 @@
-<h4>All users</h4>
+<ul class="nav nav-pills">
+  <li>All Users: <u><strong><%= @users.count %></strong></u> in total</li>
+</ul>
 <table class="table table-bordered">
   <tr>
   	<th>Email</th>
     <th>Name</th>
-    <th>Phone Number</th>
+    <th>Contacts</th>
   	<th>Registeration</th>
     <th>Last Update</th>
   </tr>
   <% @users.each do |user| %>
     <tr>
-      <td><%= user.email %></td>
+      <td><%= link_to user.email, user_path(user) %></td>
       <td><%= user.name %></td>
-      <td><%= user.phone %></td>
-      <td><%= user.created_at %></td>
-      <td><%= user.updated_at %></td>
+      <td><%= get_contacts(user).count %></td>
+      <td><%= user.created_at.to_formatted_s(:db) %></td>
+      <td><%= user.updated_at.to_formatted_s(:db) %></td>
     </tr>
   <% end %>
 </table>

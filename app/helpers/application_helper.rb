@@ -9,14 +9,14 @@ module ApplicationHelper
   def signed_in_user
   	unless signed_in?
   	  store_location
-	  flash[:notice] = "Please sign in."
-	  redirect_to signin_path
-	end
+	    flash[:notice] = "Please sign in."
+	    redirect_to signin_path
+	  end
   end
 
   def correct_user
     @user = User.find(params[:id])
-    unless @user == current_user
+    unless @user == current_user || current_user.admin == true
       redirect_to contact_path(current_user)
     end
   end
@@ -70,7 +70,7 @@ module ApplicationHelper
   	user.update_attribute(:name, params[:name])&&user.update_attribute(:phone, params[:phone])&&user.update_attribute(:description, params[:description])
   end
 
-  # Relationships related --------------------
+  # Relationships & Contacts related --------------------
 
   def admin?
     current_user.admin
@@ -80,6 +80,10 @@ module ApplicationHelper
   	relationship = Relationship.new(invitation_id: invitation.id, inviter_id: invitation.user_id, invitee_id: user.id)
   	relationship.save
   	invitation.update_attribute(:status, "connected")
+  end
+
+  def get_contacts (user)
+    user.invitees + user.inviters
   end
 
 end

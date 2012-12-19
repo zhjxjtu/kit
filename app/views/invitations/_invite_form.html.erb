@@ -1,5 +1,13 @@
-<%= form_for @invitation do |f| %>
-  <%= f.hidden_field :user_id, value: current_user.id  %>
-  <%= f.text_field :email, class:"search-query", placeholder: "Input email to invite" %>
-  <%= f.submit "Invite new friend", class: "btn btn-primary" %>
-<% end %>
+  <ul class="nav nav-pills">
+    <li>
+      <label>You have <u><strong><%= @invitations.count %></strong></u> invitations</label>
+    </li>
+    <li class="pull-right">
+      <%= form_for @invitation, html: {class: "form-inline"} do |f| %>
+  		<%= f.hidden_field :user_id, value: current_user.id  %>
+  		<%= f.text_field :email, class: "input-small", placeholder: "Input email" %>
+  		<%= f.submit "Add", class: "btn btn-small btn-primary" %>
+	  <% end %>
+    </li>
+  </ul>
+
