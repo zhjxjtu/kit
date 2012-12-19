@@ -1,10 +1,13 @@
 <%= form_for @user, url: '/users' do |f| %>
-  <label><h4>New to Jing's App? Sign up</h4></label>
+  <label><h5>New to JingsApp? Sign up</h5></label>
   <%= f.text_field :name, placeholder: "Full Name" %>
   <%= f.text_field :email, placeholder: "Email" %>
   <%= f.password_field :password, placeholder: "Password" %>
   <%= f.password_field :password_confirmation, placeholder: "Re-type password" %>
-  <label class="checkbox"><%= check_box("page", "remember_me", { checked: true }, "yes", "no") %> Remember me</label>
-  <%= f.submit "Create my account", class: "btn btn-primary" %>
+  <label class="checkbox">
+  	<%= check_box("page", "remember_me", { checked: true }, "yes", "no") %>
+  	<small>Remember me</small>  	
+  </label>
+  <%= f.submit "Create my account", class: "btn btn-warning" %>
   <br>
 <% end %>
