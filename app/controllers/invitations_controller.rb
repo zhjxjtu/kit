@@ -37,7 +37,7 @@ class InvitationsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       create_relationship(invitation, user)
       sign_in(user, params[:remember_me])
-      flash[:success] = "You are now connected with #{invitation.user.name}"
+      flash[:success] = "You are now connected with " + invitation.user.name
       redirect_to contact_path(current_user)
     else
       flash[:error] = 'Invalid email or password'
@@ -51,15 +51,21 @@ class InvitationsController < ApplicationController
   end
 
   def create
-  	@invitation = Invitation.new(params[:invitation])
-  	if @invitation.save
+  	@invitation = Invitation.find_or_create_by_user_id_and_email(params[:invitation])
+  	if @invitation.email == current_user.email
+      flash[:error] = "You can not invite yourself"
+      redirect_to invitation_path(current_user)
+    elsif @invitation.status == "connected"
+      flash[:notice] = "You already have the information of " + User.find_by_email(@invitation.email).name + " (#{@invitation.email})"
+      redirect_to invitation_path(current_user)
+    elsif @invitation.save
       flash[:success] = "An invitation sent to #{@invitation.email}"
       redirect_to invitation_path(current_user)
       # Delayed jobs: SystemEmails.delay.invite(@invitation)
-      SystemEmails.invite(@invitation).deliver
+      SystemEmails.invite(@invitation).deliver unless User.exists?(email: @invitation.email)
   	else
-  	  flash.now[:error] = @invitation.errors.full_messages[0]
-      render 'show'
+  	  flash[:error] = @invitation.errors.full_messages[0]
+      redirect_to invitation_path(current_user)
   	end
   end
 
