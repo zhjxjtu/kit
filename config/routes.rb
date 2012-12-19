@@ -9,7 +9,7 @@ Kit::Application.routes.draw do
   match '/signin',  to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
 
-  resources :invitations, only: [:show, :create]
+  resources :invitations, only: [:edit, :show, :create]
   match '/invitations_new_signup', to: 'invitations#new_signup'
   match '/invitations_accept_signup', to: 'invitations#accept_signup', via: :post
   match '/invitations_new_signin', to: 'invitations#new_signin'

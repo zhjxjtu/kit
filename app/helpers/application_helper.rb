@@ -70,17 +70,38 @@ module ApplicationHelper
   	user.update_attribute(:name, params[:name])&&user.update_attribute(:phone, params[:phone])&&user.update_attribute(:description, params[:description])
   end
 
-  # Relationships & Contacts related --------------------
-
   def admin?
     current_user.admin
   end
+
+  # Invitations related --------------------
 
   def create_relationship (invitation, user)
   	relationship = Relationship.new(invitation_id: invitation.id, inviter_id: invitation.user_id, invitee_id: user.id)
   	relationship.save
   	invitation.update_attribute(:status, "connected")
   end
+
+  def add_self?(email)
+    email == current_user.email
+  end
+
+  def current_contact_by_email?(email)
+    if user = User.find_by_email(email)
+      current_user.invitees.exists?(user.id) || current_user.inviters.exists?(user.id)
+    end
+  end
+
+  def existing_invitation?(email)
+    current_user.invitations.exists?(email: email)
+  end
+
+  def send_invitation(invitation)
+    # Delayed jobs: SystemEmails.delay.invite(@invitation)
+    SystemEmails.invite(invitation).deliver unless User.exists?(email: invitation.email)
+  end
+
+  # Contacts related --------------------
 
   def get_contacts (user)
     user.invitees + user.inviters

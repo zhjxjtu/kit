@@ -3,10 +3,11 @@ class Invitation < ActiveRecord::Base
   belongs_to :user
   has_one :relationship
 
+  before_save { |user| user.email = email.downcase }
   before_save :create_token
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
+  validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }
   validates :user_id, presence: true
 
   private

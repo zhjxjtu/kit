@@ -46,26 +46,34 @@ class InvitationsController < ApplicationController
   end
 
   def show
+    @invitations = Invitation.all.where("email = ? AND status = ?", current_user.email, "new")
+  end
+
+  def edit
   	@invitation = Invitation.new
     @invitations = current_user.invitations.where("status = ?", "new")
   end
 
   def create
-  	@invitation = Invitation.find_or_create_by_user_id_and_email(params[:invitation])
-  	if @invitation.email == current_user.email
-      flash[:error] = "You can not invite yourself"
-      redirect_to invitation_path(current_user)
-    elsif @invitation.status == "connected"
+  	@invitation = Invitation.new(params[:invitation])
+    @invitation.email = @invitation.email.downcase
+  	if add_self?(@invitation.email)
+      flash[:error] = "You can not add yourself"
+      redirect_to edit_invitation_path(current_user)
+    elsif current_contact_by_email?(@invitation.email)
       flash[:notice] = "You already have the information of " + User.find_by_email(@invitation.email).name + " (#{@invitation.email})"
-      redirect_to invitation_path(current_user)
+      redirect_to edit_invitation_path(current_user)
+    elsif existing_invitation?(@invitation.email)
+      flash[:success] = "An reminding email sent to #{@invitation.email}"
+      redirect_to edit_invitation_path(current_user)
+      send_invitation(@invitation)
     elsif @invitation.save
       flash[:success] = "An invitation sent to #{@invitation.email}"
-      redirect_to invitation_path(current_user)
-      # Delayed jobs: SystemEmails.delay.invite(@invitation)
-      SystemEmails.invite(@invitation).deliver unless User.exists?(email: @invitation.email)
+      redirect_to edit_invitation_path(current_user)
+      send_invitation(@invitation)
   	else
   	  flash[:error] = @invitation.errors.full_messages[0]
-      redirect_to invitation_path(current_user)
+      redirect_to edit_invitation_path(current_user)
   	end
   end
 
