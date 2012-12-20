@@ -1,10 +1,7 @@
 // Place all customized css here
+@import "bootstrap";
 
-.table th {
+body {
+  font-family: "Open Sans", Calibri, Candara, Arial, sans-serif;
   font-size: 14px;
-}
-
-.table td {
-  font-size: 12px;
-  line-height: 15px;
 }

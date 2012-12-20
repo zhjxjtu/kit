@@ -2,7 +2,8 @@
   <li>All Users: <u><strong><%= @users.count %></strong></u> in total</li>
 </ul>
 <br>
-<table class="table table-bordered">
+<% if @users.any? %>
+<table class="table table-condensed">
   <tr>
   	<th>Email</th>
     <th>Name</th>
@@ -34,3 +35,4 @@
     </tr>
   <% end %>
 </table>
+<% end %>

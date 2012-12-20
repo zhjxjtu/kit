@@ -51,7 +51,7 @@ class InvitationsController < ApplicationController
 
   def edit
   	@invitation = Invitation.new
-    @invitations = Invitation.where("email = ? AND status = ?", params[:id], "new")
+    @invitations = Invitation.where("user_id = ? AND status = ?", params[:id], "new")
   end
 
   def create
