@@ -4,7 +4,7 @@ class ContactsController < ApplicationController
   before_filter :correct_user, only: [:show]
 
   def show
-  	@contacts = get_contacts (current_user)
+  	@contacts = get_contacts_by_id(params[:id])
   end
 
 end

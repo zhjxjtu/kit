@@ -115,7 +115,12 @@ module ApplicationHelper
 
   # Contacts related --------------------
 
-  def get_contacts (user)
+  def get_contacts_by_id(id)
+    user = User.find_by_id(id)
+    user.invitees + user.inviters
+  end
+
+  def get_contacts_by_user(user)
     user.invitees + user.inviters
   end
 

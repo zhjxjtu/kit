@@ -7,12 +7,14 @@
   	<th>Name</th>
     <th>Email</th>
     <th>Phone Number</th>
+    <th>Last Updated</th>
   </tr>
   <% @contacts.each do |contact| %>
     <tr>
       <td><%= contact.name %></td>
       <td><%= contact.email %></td>
       <td><%= contact.phone %></td>
+      <td><%= contact.updated_at.to_formatted_s(:db) %></td>
     </tr>
   <% end %>
 </table>
