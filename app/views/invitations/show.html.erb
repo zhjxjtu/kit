@@ -1,2 +1,8 @@
-<% provide(:title, 'Inbox') %>
-<div><%= render 'invitations/received_invitations_table' %></div>
+<% provide(:title, 'Invitations') %>
+<%= render 'layouts/sub_nav' %>
+<div class="span6">
+  <%= render 'invitations/received_invitations_table' %>
+</div>
+<div class="span5 pull-right">
+  <%= render 'invitations/sent_invitations_table' %>
+</div>
