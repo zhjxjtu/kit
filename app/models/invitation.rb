@@ -1,5 +1,6 @@
 class Invitation < ActiveRecord::Base
-  attr_accessible :email, :status, :token, :user_id
+  attr_accessible :email, :status, :token, :user_id, 
+                  :name, :phone, :description, :message
   belongs_to :user
   has_one :relationship
 
