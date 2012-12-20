@@ -76,7 +76,7 @@ module ApplicationHelper
 
   # Invitations related --------------------
 
-  def create_relationship (invitation, user)
+  def create_relationship(invitation, user)
   	relationship = Relationship.new(invitation_id: invitation.id, inviter_id: invitation.user_id, invitee_id: user.id)
   	relationship.save
   	invitation.update_attribute(:status, "connected")
@@ -92,7 +92,19 @@ module ApplicationHelper
     end
   end
 
-  def existing_invitation?(email)
+  def already_invited_by?(email)
+    if user = User.find_by_email(email)
+      user.invitations.exists?(user_id: user.id, email: current_user.email)
+    end
+  end
+
+  def accept_original_invitation(invitation)
+    original_inviter = User.find_by_email(invitation.email)
+    original_invitation = Invitation.find_by_user_id_and_email(original_inviter.id, current_user.email)
+    create_relationship(original_invitation, current_user)
+  end
+
+  def existing_invitation_to?(email)
     current_user.invitations.exists?(email: email)
   end
 

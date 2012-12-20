@@ -3,6 +3,7 @@
     <label>You've received <u><strong><%= @invitations.count %></strong></u> invitations</label>
   </li>
 </ul>
+<br>
 <table class="table table-bordered">
   <tr>
   	<th>Email</th>
@@ -10,7 +11,7 @@
   </tr>
   <% @invitations.each do |invitation| %>
     <tr>
-      <td><%= invitation.email %></td>
+      <td><%= invitation.user.email %></td>
       <td><%= invitation.created_at.to_formatted_s(:db) %></td>
     </tr>
   <% end %>
