@@ -46,7 +46,7 @@ class InvitationsController < ApplicationController
   end
 
   def show
-    @invitations = Invitation.all.where("email = ? AND status = ?", current_user.email, "new")
+    @invitations = Invitation.where("email = ? AND status = ?", current_user.email, "new")
   end
 
   def edit

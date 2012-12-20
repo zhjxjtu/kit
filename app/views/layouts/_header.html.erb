@@ -9,7 +9,10 @@
               <%= link_to 'Contacts', contact_path(current_user), tabindex: "-1" %>
             </li>
     	      <li <% if yield(:title) == "Add" %>class="active"<% end %>>
-              <%= link_to 'Add +', edit_invitation_path(current_user), tabindex: "-1" %>
+              <%= link_to 'Add+', edit_invitation_path(current_user), tabindex: "-1" %>
+            </li>
+            <li <% if yield(:title) == "Inbox" %>class="active"<% end %>>
+              <%= link_to 'Inbox', invitation_path(current_user), tabindex: "-1" %>
             </li>
             <li class="divider-vertical"></li>
     	      <li class="dropdown">
