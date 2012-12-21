@@ -13,26 +13,28 @@
   <li <% if yield(:sub_title) == "Mutual Contacts" %>class="active"<% end %>>
     <%= link_to "Mutual Contacts", contact_path(current_user) %>
   </li>
-  <li <% if yield(:sub_title) == "Received" %>class="active"<% end %>>
-    <%= link_to "Received", invitation_path(current_user) %>
-  </li>
   <li <% if yield(:sub_title) == "Pending" %>class="active"<% end %>>
-    <%= link_to "Pending", edit_invitation_path(current_user) %>
+    <%= link_to "Pending", invitation_path(current_user) %>
   </li>
   <li class="<% if yield(:title) == current_user.name && yield(:sub_title) == "Profile" %>active<% end %> pull-right">
-    <a href="/users/<%= current_user.id %>"><%= current_user.name %> <i class="icon-user"></i></a>
+    <a href="/users/<%= current_user.id %>"><i class="icon-user"></i></a>
   </li>
   <% if yield(:title) != current_user.name && yield(:sub_title) == "Profile" %>
     <li class="active">
       <%= link_to @user.name, '#' %>
     </li>
   <% end %>
+  <% if yield(:title) == "Account" %>
+    <li class="active pull-right">
+      <%= link_to "Account Settings", '#' %>
+    </li>
+  <% end %>
 </ul>
 
-<div id="new_contact_modal" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="new_contact_modal_label" aria-hidden="true">
+<div id="new_contact_modal" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="new_contact_label" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="new_contact_modal_label">New Contact</h3>
+    <h3 id="new_contact_label">New Contact</h3>
   </div>
   <div class="modal-body">
     <div class="accordion-group">

@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
 
   # filter of show should be contacts user, to be developed
-  before_filter :signed_in_user, only: [:index, :edit, :update, :show, :destroy]
-  before_filter :myself_or_admin_user, only: [:edit, :update]
+  before_filter :signed_in_user, only: [:index, :update, :show, :destroy]
+  before_filter :myself_or_admin_user, only: [:update]
   before_filter :users_show_authorized_user, only: [:show]
   before_filter :admin_user, only: [:index, :destroy]
 
@@ -29,6 +29,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    @invitation = Invitation.new
   end
 
   def update
@@ -36,10 +37,10 @@ class UsersController < ApplicationController
     if update_without_password(@user, params[:user])
       flash[:success] = "Profile updated"
       sign_in(@user,"yes")
-      redirect_to contact_path(current_user)
+      redirect_to user_path(current_user)
     else
       flash.now[:error] = @user.errors.full_messages[0]
-      render 'edit'
+      redirect_to user_path(current_user)
     end
   end
 

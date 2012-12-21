@@ -2,7 +2,7 @@ Kit::Application.routes.draw do
 
   root to: 'webpages#landing'
 
-  resources :users
+  resources :users, only: [:new, :create, :index, :update, :show, :destroy]
   match '/signup',  to: 'users#new'
 
   resources :sessions, only: [:new, :create, :destroy]

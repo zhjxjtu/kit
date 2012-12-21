@@ -1,14 +1,30 @@
 <table class="table">
   <thead>
     <tr>
+      <th>Received</th>
+      <th>Name</th>
       <th>Email</th>
-      <th>Time</th>
+      <th>Description</th>
+      <th>Received at</th>
     </tr>
   </thead>
   <tbody>
     <% @invitations.each do |invitation| %>
       <tr>
+        <td>
+          <div class="btn-group">
+            <button type="button" class="btn btn-mini btn-success">Accept</button>
+            <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Reject", '#' %></li>
+            </ul>
+          </div>          
+        </td>
+        <td><%= invitation.user.name %></td>
         <td><%= invitation.user.email %></td>
+        <td><%= invitation.user.description %></td>
         <td><%= invitation.created_at.to_formatted_s(:db) %></td>
       </tr>
     <% end %>

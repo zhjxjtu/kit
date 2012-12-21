@@ -1,3 +1,10 @@
 <% provide(:title, 'Contacts') %>
-<% provide(:sub_title, 'Received') %>
-<%= render 'invitations/received_invitations_table' %>
+<% provide(:sub_title, 'Pending') %>
+<div class="row">
+  <div class="span7 div-table">
+    <%= render 'invitations/received_invitations_table' %>
+  </div>
+  <div class="span5 div-table">
+    <%= render 'invitations/sent_invitations_table' %>
+  </div>
+</div>

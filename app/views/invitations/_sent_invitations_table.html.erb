@@ -1,13 +1,25 @@
 <table class="table">
   <thead>  
     <tr>
-    	<th>Email</th>
-    	<th>Time</th>
+      <th>Added</th>
+      <th>Email</th>
+    	<th>Add at</th>
     </tr>
   </thead>
   <tbody>
     <% @invitations.each do |invitation| %>
       <tr>
+        <td>
+          <div class="btn-group">
+            <button type="button" class="btn btn-mini btn-warning">Remind</button>
+            <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Cancel", '#' %></li>
+            </ul>
+          </div>          
+        </td>
         <td><%= invitation.email %></td>
         <td><%= invitation.created_at.to_formatted_s(:db) %></td>
       </tr>

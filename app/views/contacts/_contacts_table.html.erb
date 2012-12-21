@@ -1,16 +1,28 @@
 <table class="table">
   <thead>
     <tr>
+      <th>All Contacts</th>
     	<th>Name</th>
       <th>Email</th>
       <th>Phone Number</th>
       <th>Description</th>
-      <th>Last Updated</th>
+      <th>Information updated at</th>
     </tr>
   </thead>
   <tbody>
     <% @contacts.each do |contact| %>
       <tr>
+        <td>
+          <div class="btn-group">
+            <button type="button" class="btn btn-mini btn-primary">vCard</button>
+            <button class="btn btn-mini btn-primary dropdown-toggle" data-toggle="dropdown">
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Other Actions", '#' %></li>
+            </ul>
+          </div>          
+        </td>
         <td><%= link_to contact.name, user_path(contact) %></td>
         <td><%= link_to contact.email, user_path(contact) %></td>
         <td><%= contact.phone %></td>

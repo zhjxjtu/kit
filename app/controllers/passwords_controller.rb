@@ -41,6 +41,7 @@ class PasswordsController < ApplicationController
 
   def edit
   	@user = User.find(params[:id])
+    @invitation = Invitation.new
   end
 
   def update
