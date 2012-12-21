@@ -11,8 +11,8 @@
   <tbody>
     <% @contacts.each do |contact| %>
       <tr>
-        <td><%= contact.name %></td>
-        <td><%= contact.email %></td>
+        <td><%= link_to contact.name, user_path(contact) %></td>
+        <td><%= link_to contact.email, user_path(contact) %></td>
         <td><%= contact.phone %></td>
         <td><%= contact.description %></td>
         <td><%= contact.updated_at.to_formatted_s(:db) %></td>
