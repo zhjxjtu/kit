@@ -1,13 +1,14 @@
+<div class="div-table">
 <table class="table">
   <thead>  
     <tr>
-      <th>Added</th>
+      <th>Unconnected</th>
       <th>Email</th>
     	<th>Add at</th>
     </tr>
   </thead>
   <tbody>
-    <% @invitations.each do |invitation| %>
+    <% @sent_invitations.each do |invitation| %>
       <tr>
         <td>
           <div class="btn-group">
@@ -26,3 +27,8 @@
     <% end %>
   </tbody>
 </table>
+</div>
+
+<div>
+  <p><h5>&nbsp;&nbsp;&nbsp;Total Unconnected: <%= @sent_invitations.count %></h5></p>
+</div> 

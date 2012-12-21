@@ -10,8 +10,8 @@
       <%= link_to 'All Users', users_path, tabindex: "-1" %>
     </li>
   <% end %>
-  <li <% if yield(:sub_title) == "Mutual Contacts" %>class="active"<% end %>>
-    <%= link_to "Mutual Contacts", contact_path(current_user) %>
+  <li <% if yield(:sub_title) == "Contacts" %>class="active"<% end %>>
+    <%= link_to "Contacts", contact_path(current_user) %>
   </li>
   <li <% if yield(:sub_title) == "Pending" %>class="active"<% end %>>
     <%= link_to "Pending", invitation_path(current_user) %>

@@ -46,13 +46,9 @@ class InvitationsController < ApplicationController
   end
 
   def show
-    @invitation = Invitation.new
-    @invitations = Invitation.where("email = ? AND status = ?", User.find(params[:id]).email, "new")
-  end
-
-  def edit
-  	@invitation = Invitation.new
-    @invitations = Invitation.where("user_id = ? AND status = ?", params[:id], "new")
+    @invitation = Invitation.new    
+    @received_invitations = Invitation.where("email = ? AND status = ?", User.find(params[:id]).email, "new")
+    @sent_invitations = Invitation.where("user_id = ? AND status = ?", params[:id], "new")
   end
 
   def create

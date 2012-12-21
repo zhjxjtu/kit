@@ -1,3 +1,4 @@
+<div class="div-table">
 <table class="table">
   <thead>
     <tr>
@@ -9,7 +10,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @invitations.each do |invitation| %>
+    <% @received_invitations.each do |invitation| %>
       <tr>
         <td>
           <div class="btn-group">
@@ -30,3 +31,8 @@
     <% end %>
   </tbody>       
 </table>
+</div>
+
+<div>
+  <p><h5>&nbsp;&nbsp;&nbsp;Total Received: <%= @received_invitations.count %></h5></p>
+</div> 
