@@ -1,38 +1,39 @@
 <ul class="nav nav-pills">
   <li>All Users: <u><strong><%= @users.count %></strong></u> in total</li>
 </ul>
-<br>
-<% if @users.any? %>
-<table class="table table-condensed">
-  <tr>
-  	<th>Email</th>
-    <th>Name</th>
-    <th>Contacts</th>
-  	<th>Registeration</th>
-    <th>Last Update</th>
-  </tr>
-  <% @users.each do |user| %>
+<table class="table">
+  <thead>
     <tr>
-      
-      <td class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown", tabindex= "-1">
-          <%= user.email %>
-          <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu">
-          <li><%= link_to "Profile", user_path(user) %></li>
-          <li class="divider"></li>
-          <li>
-            <%= link_to "Delete", user, method: :delete, data: { confirm: " Are you sure?" } %>
-          </li>
-        </ul>
-      </td>
-
-      <td><%= user.name %></td>
-      <td><%= link_to get_contacts_by_user(user).count, contact_path(user) %></td>
-      <td><%= user.created_at.to_formatted_s(:db) %></td>
-      <td><%= user.updated_at.to_formatted_s(:db) %></td>
+    	<th>Email</th>
+      <th>Name</th>
+      <th>Contacts</th>
+    	<th>Registeration</th>
+      <th>Last Update</th>
     </tr>
-  <% end %>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        
+        <td class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown", tabindex= "-1">
+            <%= user.email %>
+            <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <li><%= link_to "Profile", user_path(user) %></li>
+            <li class="divider"></li>
+            <li>
+              <%= link_to "Delete", user, method: :delete, data: { confirm: " Are you sure?" } %>
+            </li>
+          </ul>
+        </td>
+
+        <td><%= user.name %></td>
+        <td><%= link_to get_contacts_by_user(user).count, contact_path(user) %></td>
+        <td><%= user.created_at.to_formatted_s(:db) %></td>
+        <td><%= user.updated_at.to_formatted_s(:db) %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
-<% end %>

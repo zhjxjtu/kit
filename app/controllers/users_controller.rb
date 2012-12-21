@@ -1,12 +1,14 @@
 class UsersController < ApplicationController
 
   # filter of show should be contacts user, to be developed
-  before_filter :signed_in_user, only: [:index, :edit, :update, :show]
-  before_filter :correct_user, only: [:edit, :update, :show]
-  before_filter :admin_user, only: [:index]
+  before_filter :signed_in_user, only: [:index, :edit, :update, :show, :destroy]
+  before_filter :myself_or_admin_user, only: [:edit, :update]
+  before_filter :users_show_authorized_user, only: [:show]
+  before_filter :admin_user, only: [:index, :destroy]
 
   def index
     @users = User.all
+    @invitation = Invitation.new
   end
 
   def new
@@ -43,6 +45,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @invitation = Invitation.new
   end
 
   def destroy

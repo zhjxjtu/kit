@@ -14,15 +14,20 @@ module ApplicationHelper
 	  end
   end
 
-  def correct_user
-    @user = User.find(params[:id])
-    unless @user == current_user || current_user.admin == true
+  def myself_or_admin_user
+    unless myself? || admin?
+      redirect_to contact_path(current_user)
+    end
+  end
+
+  def users_show_authorized_user
+    unless myself? || invited? || connected? || admin?
       redirect_to contact_path(current_user)
     end
   end
 
   def admin_user
-  	unless current_user.admin == true
+  	unless admin?
   	  redirect_to contact_path(current_user)
   	end
   end 
@@ -46,10 +51,6 @@ module ApplicationHelper
   	@current_user ||= User.find_by_remember_token(cookies[:remember_token])
   end
 
-  def signed_in?
-    !current_user.nil?
-  end
-
   def sign_out
     self.current_user = nil
     cookies.delete(:remember_token)
@@ -60,8 +61,12 @@ module ApplicationHelper
   end
 
   def redirect_back_or(default)
-  	edirect_to(session[:return_to] || default)
+  	redirect_to(session[:return_to] || default)
   	session.delete(:return_to)
+  end
+
+  def signed_in?
+    !current_user.nil?
   end
 
   # Users related --------------------
@@ -69,9 +74,21 @@ module ApplicationHelper
   def update_without_password(user, params)
   	user.update_attribute(:name, params[:name])&&user.update_attribute(:phone, params[:phone])&&user.update_attribute(:description, params[:description])
   end
+  
+  def myself?
+    current_user == User.find(params[:id])
+  end
+
+  def invited?
+    User.find(params[:id]).invitations.exists?(email: current_user.email)
+  end
+
+  def connected?
+    current_user.invitees.exists?(params[:id]) || current_user.inviters.exists?(params[:id])
+  end
 
   def admin?
-    current_user.admin
+    current_user.admin == true
   end
 
   # Invitations related --------------------

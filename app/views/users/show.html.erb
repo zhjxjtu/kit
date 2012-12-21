@@ -1,4 +1,3 @@
-<% provide(:title, "@user.name") %>
-<div class= "span4 offset4">
-  <%= render 'users/profile_table' %>
-</div>
+<% provide(:title, @user.name) %>
+<% provide(:sub_title, 'Profile') %>
+<%= render 'users/profile_table' %>

@@ -46,6 +46,7 @@ class InvitationsController < ApplicationController
   end
 
   def show
+    @invitation = Invitation.new
     @invitations = Invitation.where("email = ? AND status = ?", User.find(params[:id]).email, "new")
   end
 
@@ -58,7 +59,7 @@ class InvitationsController < ApplicationController
   	@invitation = Invitation.new(params[:invitation])
     @invitation.email = @invitation.email.downcase
   	if add_self?(@invitation.email)
-      flash[:error] = "You can not add yourself"
+      flash[:error] = "You can't add yourself"
       redirect_to edit_invitation_path(current_user)
     elsif current_contact_by_email?(@invitation.email)
       flash[:notice] = "You already have the information of " + User.find_by_email(@invitation.email).name + " (#{@invitation.email})"

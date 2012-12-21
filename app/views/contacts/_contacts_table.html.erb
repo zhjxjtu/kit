@@ -1,16 +1,22 @@
-<table class="table table-condensed">
-  <tr>
-  	<th>Name</th>
-    <th>Email</th>
-    <th>Phone Number</th>
-    <th>Last Updated</th>
-  </tr>
-  <% @contacts.each do |contact| %>
+<table class="table">
+  <thead>
     <tr>
-      <td><%= contact.name %></td>
-      <td><%= contact.email %></td>
-      <td><%= contact.phone %></td>
-      <td><%= contact.updated_at.to_formatted_s(:db) %></td>
+    	<th>Name</th>
+      <th>Email</th>
+      <th>Phone Number</th>
+      <th>Description</th>
+      <th>Last Updated</th>
     </tr>
-  <% end %>
+  </thead>
+  <tbody>
+    <% @contacts.each do |contact| %>
+      <tr>
+        <td><%= contact.name %></td>
+        <td><%= contact.email %></td>
+        <td><%= contact.phone %></td>
+        <td><%= contact.description %></td>
+        <td><%= contact.updated_at.to_formatted_s(:db) %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>

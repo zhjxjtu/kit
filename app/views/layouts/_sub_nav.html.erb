@@ -4,12 +4,28 @@
 	  <i class="icon-plus"></i>
   	</a>
   </li>
-  <li <% if yield(:title) == "Contacts" %>class="active"<% end %>>
-    <%= link_to "Contacts", contact_path(params[:id]) %>
+  <% if admin? %>
+    <li <% if yield(:sub_title) == "All Users" %>class="active"<% end %>>
+      <%= link_to 'All Users', users_path, tabindex: "-1" %>
+    </li>
+  <% end %>
+  <li <% if yield(:sub_title) == "Mutual Contacts" %>class="active"<% end %>>
+    <%= link_to "Mutual Contacts", contact_path(current_user) %>
   </li>
-  <li <% if yield(:title) == "Invitations" %>class="active"<% end %>>
-    <%= link_to "Invitations", invitation_path(params[:id]) %>
+  <li <% if yield(:sub_title) == "Received" %>class="active"<% end %>>
+    <%= link_to "Received", invitation_path(current_user) %>
   </li>
+  <li <% if yield(:sub_title) == "Pending" %>class="active"<% end %>>
+    <%= link_to "Pending", edit_invitation_path(current_user) %>
+  </li>
+  <li class="<% if yield(:title) == current_user.name && yield(:sub_title) == "Profile" %>active<% end %> pull-right">
+    <a href="/users/<%= current_user.id %>"><%= current_user.name %> <i class="icon-user"></i></a>
+  </li>
+  <% if yield(:title) != current_user.name && yield(:sub_title) == "Profile" %>
+    <li class="active">
+      <%= link_to @user.name, '#' %>
+    </li>
+  <% end %>
 </ul>
 
 <div id="myModal" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -18,36 +34,34 @@
     <h3 id="myModalLabel">New Contact</h3>
   </div>
   <div class="modal-body">
-    <div class="accordion" id="accordion2">
-      <div class="accordion-group">
-        <div class="accordion-heading">
-          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-            Email
-          </a>
-        </div>
-        <div id="collapseOne" class="accordion-body collapse in">
-          <div class="accordion-inner">
-            <%= form_for @invitation do |f| %>
-              <%= f.hidden_field :user_id, value: current_user.id %>
-              <%= f.text_field :email, class: "input-xlarge", placeholder: "Input email to Add" %>
-          </div>
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+          Email
+        </a>
+      </div>
+      <div id="collapseOne" class="accordion-body collapse in">
+        <div class="accordion-inner">
+          <%= form_for @invitation do |f| %>
+            <%= f.hidden_field :user_id, value: current_user.id %>
+            <%= f.text_field :email, class: "input-xlarge", placeholder: "Input email to Add" %>
         </div>
       </div>
-      <div class="accordion-group">
-        <div class="accordion-heading">
-          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-            Optional Information
-          </a>
-        </div>
-        <div id="collapseTwo" class="accordion-body collapse">
-          <div class="accordion-inner">
-            <%= f.text_field :name, class: "input-xlarge", placeholder: "Name" %><br>
-            <%= f.text_field :phone, class: "input-xlarge", placeholder: "Phone Number" %><br>
-            <%= f.text_area :message, class: "input-xlarge", rows: 5 ,placeholder: "Leava a message" %> 
-          </div>
+    </div>
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+          Optional Information
+        </a>
+      </div>
+      <div id="collapseTwo" class="accordion-body collapse">
+        <div class="accordion-inner">
+          <%= f.text_field :name, class: "input-xlarge", placeholder: "Name" %><br>
+          <%= f.text_field :phone, class: "input-xlarge", placeholder: "Phone Number" %><br>
+          <%= f.text_area :message, class: "input-xlarge", rows: 5 ,placeholder: "Leava a message" %> 
         </div>
       </div>
-    </div>          
+    </div>            
   </div>
   <div class="modal-footer">
     <%= f.submit "Save", class: "btn btn-primary pull-left" %>

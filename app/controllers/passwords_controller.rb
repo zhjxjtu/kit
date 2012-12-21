@@ -1,7 +1,7 @@
 class PasswordsController < ApplicationController
   
   before_filter :signed_in_user, only: [:show, :update]
-  before_filter :correct_user, only: [:show, :update]
+  before_filter :myself_or_admin_user, only: [:show, :update]
 
   def new
     @user = User.new

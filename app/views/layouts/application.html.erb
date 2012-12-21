@@ -11,8 +11,11 @@
 </head>
 <body>
   <%= render 'layouts/header' %>
-  <br><br><br><br><br>
+  <br><br><br>
   <div class="container">
+    <% if signed_in? %>
+      <%= render 'layouts/sub_nav' %>
+    <% end %>
     <% flash.each do |key, value| %>
       <div class="alert alert-<%= key %>"><%= value %></div>
     <% end %>

@@ -1,12 +1,16 @@
-<table class="table table-condensed table-bordered">
-  <tr>
-  	<th>Email</th>
-  	<th>Time</th>
-  </tr>
-  <% @invitations.each do |invitation| %>
+<table class="table">
+  <thead>  
     <tr>
-      <td><%= invitation.email %></td>
-      <td><%= invitation.created_at.to_formatted_s(:db) %></td>
+    	<th>Email</th>
+    	<th>Time</th>
     </tr>
-  <% end %>
+  </thead>
+  <tbody>
+    <% @invitations.each do |invitation| %>
+      <tr>
+        <td><%= invitation.email %></td>
+        <td><%= invitation.created_at.to_formatted_s(:db) %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
