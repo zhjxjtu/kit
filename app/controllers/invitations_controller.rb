@@ -45,10 +45,10 @@ class InvitationsController < ApplicationController
     end
   end
 
-  def show
+  def index
     @invitation = Invitation.new    
-    @received_invitations = Invitation.where("email = ? AND status = ?", User.find(params[:id]).email, "new")
-    @sent_invitations = Invitation.where("user_id = ? AND status = ?", params[:id], "new")
+    @received_invitations = Invitation.where("email = ? AND status = ?", current_user.email, "new")
+    @sent_invitations = current_user.invitations.where("status = ?", "new")
   end
 
   def create
@@ -66,15 +66,15 @@ class InvitationsController < ApplicationController
       redirect_to contacts_path
     elsif existing_invitation_to?(@invitation.email)
       flash[:success] = "An reminding email sent to #{@invitation.email}"
-      redirect_to invitation_path(current_user)
+      redirect_to invitations_path
       send_invitation(@invitation)
     elsif @invitation.save
       flash[:success] = "An invitation sent to #{@invitation.email}"
-      redirect_to invitation_path(current_user)
+      redirect_to invitations_path
       send_invitation(@invitation)
   	else
   	  flash[:error] = @invitation.errors.full_messages[0]
-      redirect_to edit_invitation_path(current_user)
+      redirect_to invitations_path
   	end
   end
 
