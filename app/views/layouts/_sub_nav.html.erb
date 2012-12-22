@@ -1,32 +1,32 @@
 <nav>
 <ul class="nav nav-tabs">
   <li>
-  	<a href="#new_contact_modal" role="button" class="btn" data-toggle="modal">
+  	<a href="#new_contact_modal" role="button" class="btn" data-toggle="modal" rel="tooltip" title="Add new contact">
 	  <i class="icon-plus"></i>
   	</a>
   </li>
   <% if admin? %>
     <li <% if yield(:sub_title) == "All Users" %>class="active"<% end %>>
-      <%= link_to 'All Users', users_path, tabindex: "-1" %>
+      <%= link_to 'All Users', users_path, rel: "tooltip", title: "List all users" %>
     </li>
   <% end %>
   <li <% if yield(:sub_title) == "Contacts" %>class="active"<% end %>>
-    <%= link_to "Contacts", contact_path(current_user) %>
+    <%= link_to '<i class="icon-user"></i>'.html_safe, contact_path(current_user), rel: "tooltip", title: "Your contacts" %>
   </li>
   <li <% if yield(:sub_title) == "Pending" %>class="active"<% end %>>
-    <%= link_to "Pending", invitation_path(current_user) %>
+    <%= link_to '<i class="icon-list-alt"></i>'.html_safe, invitation_path(current_user), rel: "tooltip", title: "Pending contacts" %>
   </li>
   <li class="<% if yield(:title) == current_user.name && yield(:sub_title) == "Profile" %>active<% end %> pull-right">
-    <a href="/users/<%= current_user.id %>"><i class="icon-user"></i></a>
+    <a href="/users/<%= current_user.id %>" rel="tooltip" title="Your profile"><i class="icon-home"></i></a>
   </li>
   <% if yield(:title) != current_user.name && yield(:sub_title) == "Profile" %>
     <li class="active">
-      <%= link_to @user.name, '#' %>
+      <%= link_to @user.name, '#', rel: "tooltip", title: "Information of #{yield(:title)}" %>
     </li>
   <% end %>
   <% if yield(:title) == "Account" %>
     <li class="active pull-right">
-      <%= link_to "Account Settings", '#' %>
+      <%= link_to "Account Settings", '#', rel: "tooltip", title: "Account settings" %>
     </li>
   <% end %>
 </ul>

@@ -1,3 +1,4 @@
+<% if @contacts.any? %>
 <div class="div-table">
 <table class="table">
   <thead>
@@ -16,7 +17,7 @@
         <td>
           <div class="btn-group">
             <button type="button" class="btn btn-mini btn-primary">vCard</button>
-            <button class="btn btn-mini btn-primary dropdown-toggle" data-toggle="dropdown">
+            <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
@@ -34,7 +35,12 @@
   </tbody>
 </table>
 </div>
-
 <div>
   <p><h5>&nbsp;&nbsp;&nbsp;Total Contacts: <%= @contacts.count %></h5></p>
-</div>  
+</div>
+<% else %>
+  <p><h4>You don't have contact</h4></p><br>
+  <a href="#new_contact_modal" role="button" class="btn btn-primary" data-toggle="modal">
+    Click to add
+  </a>
+<% end %>

@@ -11,8 +11,10 @@ table {
 }
 
 .div-table {
-  max-height: 500px;
+  max-height: 450px;
   overflow: auto;
   background-color: #eeffff;
   border: 1px solid #ddeeee;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
 }

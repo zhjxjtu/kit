@@ -7,4 +7,9 @@
   <div class="span5">
     <%= render 'invitations/sent_invitations_table' %>
   </div>
+  <% if !@received_invitations.any? && !@sent_invitations.any? %>
+  	<div class="span12">
+  	  <p><h4>You don't have contact in pending status</h4></p>
+  	</div>
+  <% end %>
 </div>

@@ -1,10 +1,11 @@
+<% if @sent_invitations.any? %>
 <div class="div-table">
 <table class="table">
   <thead>  
     <tr>
       <th>Unconnected</th>
       <th>Email</th>
-    	<th>Add at</th>
+    	<th>Added at</th>
     </tr>
   </thead>
   <tbody>
@@ -32,3 +33,4 @@
 <div>
   <p><h5>&nbsp;&nbsp;&nbsp;Total Unconnected: <%= @sent_invitations.count %></h5></p>
 </div> 
+<% end %>

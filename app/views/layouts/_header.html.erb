@@ -4,11 +4,7 @@
   	  <%= link_to "JingsApp (Beta)", root_path, class: "brand", id: "logo", tabindex: "-1" %>
 	    <nav>
     	  <ul class="nav nav-pills pull-right">
-    	    <% if signed_in? %>            
-            <li <% if yield(:title) == "Contacts" %>class="active"<% end %>>
-              <%= link_to 'Contacts', contact_path(current_user), tabindex: "-1" %>
-            </li>
-            <li class="divider-vertical"></li>
+    	    <% if signed_in? %>                        
     	      <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown", tabindex= "-1">
                 <%= current_user.name %>

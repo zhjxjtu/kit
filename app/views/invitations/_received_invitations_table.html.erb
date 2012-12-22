@@ -1,3 +1,4 @@
+<% if @received_invitations.any? %>
 <div class="div-table">
 <table class="table">
   <thead>
@@ -36,3 +37,4 @@
 <div>
   <p><h5>&nbsp;&nbsp;&nbsp;Total Received: <%= @received_invitations.count %></h5></p>
 </div> 
+<% end %>
