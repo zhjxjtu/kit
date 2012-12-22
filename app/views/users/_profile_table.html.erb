@@ -25,7 +25,7 @@
   </tr>
 </table>
 <% if myself? %>
-<a href="#update_profile_modal" role="button" class="btn btn-primary" data-toggle="modal">Update</a>
+<a href="#update_profile_modal" role="button" class="btn btn-primary" data-toggle="modal">Edit</a>
 <div id="update_profile_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="update_profile_label" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -54,7 +54,7 @@
       </div>
   </div>
   <div class="modal-footer">
-      <%= f.submit "Save", class: "btn btn-primary pull-left" %>
+      <%= f.submit "Update", class: "btn btn-primary pull-left" %>
     <% end %>
     <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
   </div>

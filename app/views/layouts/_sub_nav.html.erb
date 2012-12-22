@@ -11,13 +11,13 @@
     </li>
   <% end %>
   <li <% if yield(:sub_title) == "Contacts" %>class="active"<% end %>>
-    <%= link_to '<i class="icon-user"></i>'.html_safe, contact_path(current_user), rel: "tooltip", title: "Your contacts" %>
+    <%= link_to '<i class="icon-list-alt"></i>'.html_safe, contact_path(current_user), rel: "tooltip", title: "Your contacts" %>
   </li>
   <li <% if yield(:sub_title) == "Pending" %>class="active"<% end %>>
-    <%= link_to '<i class="icon-list-alt"></i>'.html_safe, invitation_path(current_user), rel: "tooltip", title: "Pending contacts" %>
+    <%= link_to '<i class="icon-envelope"></i>'.html_safe, invitation_path(current_user), rel: "tooltip", title: "Pending contacts" %>
   </li>
   <li class="<% if yield(:title) == current_user.name && yield(:sub_title) == "Profile" %>active<% end %> pull-right">
-    <a href="/users/<%= current_user.id %>" rel="tooltip" title="Your profile"><i class="icon-home"></i></a>
+    <a href="/users/<%= current_user.id %>" rel="tooltip" title="Your profile"><i class="icon-user"></i></a>
   </li>
   <% if yield(:title) != current_user.name && yield(:sub_title) == "Profile" %>
     <li class="active">
