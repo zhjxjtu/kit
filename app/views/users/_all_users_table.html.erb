@@ -26,7 +26,7 @@
           </ul>
         </td>
         <td><%= user.name %></td>
-        <td><%= link_to get_contacts_by_user(user).count, contact_path(user) %></td>
+        <td><%= get_contacts_by_user(user).count %></td>
         <td><%= user.created_at.to_formatted_s(:db) %></td>
         <td><%= user.updated_at.to_formatted_s(:db) %></td>
       </tr>

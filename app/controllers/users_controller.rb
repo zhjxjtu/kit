@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   	if @user.save
       sign_in(@user, params[:page][:remember_me])
       flash[:success] = "Welcome to JingsApp!"
-      redirect_to contact_path(current_user)
+      redirect_to contacts_path
   	else
   	  flash.now[:error] = @user.errors.full_messages[0]
       render 'new'

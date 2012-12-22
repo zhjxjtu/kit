@@ -52,7 +52,7 @@ class PasswordsController < ApplicationController
     elsif @user.update_attributes(params[:user])
       flash[:success] = "Password updated"
       sign_in(@user,"yes")
-      redirect_to contact_path(current_user)
+      redirect_to contacts_path
     else
       flash.now[:error] = @user.errors.full_messages[0]
       render 'edit'
