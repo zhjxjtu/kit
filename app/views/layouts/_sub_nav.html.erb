@@ -11,7 +11,7 @@
     </li>
   <% end %>
   <li <% if yield(:sub_title) == "Contacts" %>class="active"<% end %>>
-    <%= link_to '<i class="icon-user"></i>'.html_safe, contact_path(current_user), rel: "tooltip", title: "Your contacts" %>
+    <%= link_to '<i class="icon-user"></i>'.html_safe, contacts_path, rel: "tooltip", title: "Your contacts" %>
   </li>
   <li <% if yield(:sub_title) == "Pending" %>class="active"<% end %>>
     <%= link_to '<i class="icon-list-alt"></i>'.html_safe, invitation_path(current_user), rel: "tooltip", title: "Pending contacts" %>

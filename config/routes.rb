@@ -15,7 +15,7 @@ Kit::Application.routes.draw do
   match '/invitations_new_signin', to: 'invitations#new_signin'
   match '/invitations_accept_signin', to: 'invitations#accept_signin', via: :post
 
-  resources :contacts, only: [:show]
+  resources :contacts, only: [:index]
   
   resources :passwords, only: [:new, :create, :edit, :update]
   match '/reset_new',  to: 'passwords#reset_new'

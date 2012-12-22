@@ -3,7 +3,7 @@ module ApplicationHelper
   # All the before filters listed here --------------------
 
   def unsigned_in_user
-  	redirect_to contact_path(current_user) unless current_user.nil?
+  	redirect_to contacts_path unless current_user.nil?
   end
   
   def signed_in_user
@@ -16,19 +16,19 @@ module ApplicationHelper
 
   def myself_or_admin_user
     unless myself? || admin?
-      redirect_to contact_path(current_user)
+      redirect_to contacts_path
     end
   end
 
   def users_show_authorized_user
     unless myself? || invited? || connected? || admin?
-      redirect_to contact_path(current_user)
+      redirect_to contacts_path
     end
   end
 
   def admin_user
   	unless admin?
-  	  redirect_to contact_path(current_user)
+  	  redirect_to contacts_path
   	end
   end 
 
